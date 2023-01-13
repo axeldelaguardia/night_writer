@@ -14,6 +14,8 @@ describe ToBraille do
 
 		it 'has attributes' do
 			expect(translator.incoming_text).to eq('hello world')
+			expect(translator.en_to_braille_dictionary['a']).to eq('100000')
+			expect(translator.en_to_braille_dictionary['f']).to eq('110100')
 		end
 	end
 	
