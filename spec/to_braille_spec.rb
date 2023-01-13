@@ -19,4 +19,11 @@ describe ToBraille do
 		end
 	end
 	
+	describe '#convert_str_to_braille' do
+		it 'converts string to braille' do
+			txt = 'hi'
+
+			expect(translator.convert_str_to_braille(txt)).to eq(["110010", "010100"])
+		end
+	end
 end
