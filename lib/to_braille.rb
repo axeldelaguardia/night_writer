@@ -47,11 +47,23 @@ class ToBraille
 		}
 	end
 
-	def convert_str_to_braille(str)
+	def convert_str_to_braille_chars(str)
 		braille = str.downcase.chars.map do |c|
 			@en_to_braille_dictionary[c]
 		end
 		braille.compact
+	end
+
+	def convert_to_braille(array)
+		message = ''
+		3.times do |n|
+			array.each do |x|
+				x[n + 0].to_s == '1' ? message << "O" : message << "."
+				x[n + 3].to_s == '1' ? message << "O" : message << "."
+			end
+			message << "\n"
+		end
+		message
 	end
 
 end
