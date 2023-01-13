@@ -46,4 +46,12 @@ class ToBraille
 			' ' => '000000'
 		}
 	end
+
+	def convert_str_to_braille(str)
+		braille = str.downcase.chars.map do |c|
+			@en_to_braille_dictionary[c]
+		end
+		braille.compact
+	end
+
 end
