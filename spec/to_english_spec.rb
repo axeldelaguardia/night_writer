@@ -49,4 +49,17 @@ describe ToEnglish do
 			expect(translator.split_text_to_columns(rows)).to eq(expected)
 		end
 	end
+
+	describe '#convert_columns_to_braille' do
+		it 'converts columns to braille arrays' do
+			columns = [[["O", "."], ["O", "."], ["O", "."], ["O", "."], ["O", "."]], 
+								 [["O", "O"], [".", "O"], ["O", "."], ["O", "."], [".", "O"]], 
+								 [[".", "."], [".", "."], ["O", "."], ["O", "."], ["O", "."]]]
+
+			hello = [['O.', 'OO', '..'], ['O.', '.O', '..'], ['O.', 'O.', 'O.'], 
+							 ['O.', 'O.', 'O.'], ['O.', '.O', 'O.']]
+
+			expect(translator.convert_columns_to_braille(columns)).to eq(hello)
+		end
+	end
 end
