@@ -35,7 +35,7 @@ describe ToBraille do
 													["11", "10", "00"], ["10", "10", "10"]]
 
 			converted_to_rows = [['11', '10', '11', '11', '10'], ['00', '00', '10', '10', '10'],
-													['10', '10', '00', '00', '10']]
+													 ['10', '10', '00', '00', '10']]
 
 			expect(translator.split_into_printable_rows(hello_in_braille)).to eq(converted_to_rows)
 		end
@@ -46,6 +46,17 @@ describe ToBraille do
 			string = '11001001110'
 
 			expect(translator.convert_nums_to_dots(string)).to eq('OO..O..OOO.')
+		end
+	end
+
+	describe 'convert_all_rows_to_dots' do
+		it 'converts multiple arrays into dots' do
+			rows = [['11', '10', '11', '11', '10'], ['00', '00', '10', '10', '10'],
+								['10', '10', '00', '00', '10']]
+
+			dots_and_os = [['OOO.OOOOO.'], ['....O.O.O.'], ['O.O.....O.']]
+
+			expect(translator.convert_all_rows_to_dots(rows)).to eq(dots_and_os)
 		end
 	end
 	# describe '#convert_to_braille' do
