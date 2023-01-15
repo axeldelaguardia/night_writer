@@ -2,8 +2,8 @@ class ToBraille
 	attr_reader :incoming_text, :outgoing_file, :en_to_braille_dictionary
 	
 	def initialize(filepaths)
-		@incoming_text = File.read("./io_files/#{filepaths[0]}")
-		@outgoing_file = File.new("./io_files/#{filepaths[1]}", 'w')
+		@incoming_text = File.read("#{filepaths[0]}")
+		@outgoing_file = File.new("#{filepaths[1]}", 'w')
 		@en_to_braille_dictionary = {
 			'a' => ['10', '00', '00'],
 			'b' => ['11', '00', '00'],

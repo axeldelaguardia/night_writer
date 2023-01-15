@@ -2,7 +2,7 @@ require './spec/spec_helper'
 
 describe ToBraille do
 	before do
-		@filepath = ['message.txt', 'braille.txt']
+		@filepath = ['./io_files/message.txt', './io_files/braille.txt']
 	end
 
 	let(:translator) { ToBraille.new(@filepath) }
@@ -68,11 +68,9 @@ describe ToBraille do
 		end
 	end
 
-	# describe '#convert_to_braille' do
-	# 	it 'converts to printable braille' do
-	# 		hi = ["110010", "010100"]
+	xdescribe '#create_file' do
+		it 'runs through the methods to create the file' do
 
-	# 		expect(translator.convert_to_braille(hi)).to eq("O..O\nOOO.\n....\n")
-	# 	end
-	# end
+		end
+	end
 end
