@@ -2,7 +2,12 @@ class ToBraille
 	attr_reader :incoming_text, :outgoing_file, :en_to_braille_dictionary
 	
 	def initialize(filepaths)
-		@incoming_text = File.read("#{filepaths[0]}")
+		begin
+			@incoming_text = File.read("#{filepaths[0]}")
+		rescue Errno::ENOENT => exception
+			$stderr.puts "Incoming file not found. Please use the correct filepath"
+			exit -1
+		end
 		@outgoing_file = File.new("#{filepaths[1]}", 'w')
 		@en_to_braille_dictionary = {
 			'a' => ['10', '00', '00'],
