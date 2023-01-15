@@ -64,10 +64,10 @@ describe ToBraille do
 		it 'translates an array to a single string and ready to write on a text file' do
 			dots_and_os = ['OOO.OOOOO.', '....O.O.O.', 'O.O.....O.']
 
-			expect(translator.translate_to_txt(dots)).to eq("OOO.OOOOO.\n....O.O.O.\nO.O.....O.")
+			expect(translator.translate_to_txt(dots_and_os)).to eq("OOO.OOOOO.\n....O.O.O.\nO.O.....O.")
 		end
 	end
-	
+
 	# describe '#convert_to_braille' do
 	# 	it 'converts to printable braille' do
 	# 		hi = ["110010", "010100"]
