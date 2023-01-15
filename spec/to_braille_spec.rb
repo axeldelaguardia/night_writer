@@ -54,7 +54,7 @@ describe ToBraille do
 			rows = [['11', '10', '11', '11', '10'], ['00', '00', '10', '10', '10'],
 								['10', '10', '00', '00', '10']]
 
-			dots_and_os = [['OOO.OOOOO.'], ['....O.O.O.'], ['O.O.....O.']]
+			dots_and_os = ['OOO.OOOOO.', '....O.O.O.', 'O.O.....O.']
 
 			expect(translator.convert_all_rows_to_dots(rows)).to eq(dots_and_os)
 		end
