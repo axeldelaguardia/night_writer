@@ -97,6 +97,16 @@ class ToBraille
 	# 	message
 	# end
 
+	def translate_to_txt(array_with_strings)
+		message = ''
+		array_with_strings[0].chars.each_slice(80).to_a.count.times do |num|
+			array_with_strings.map do |string|
+				message << string.chars.each_slice(80).to_a[num].join << "\n"
+			end
+		end
+		message.chop
+	end
+
 	def self.create_file(terminal_arguments)
 		to_braille = ToBraille.new(terminal_arguments)
 		braille_array = to_braille.convert_str_to_braille_arrays(to_braille.incoming_text)
