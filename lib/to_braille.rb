@@ -47,30 +47,42 @@ class ToBraille
 		}
 	end
 
-	def convert_str_to_braille_chars(str)
+	def convert_str_to_braille_arrays(str)
 		braille = str.downcase.chars.map do |c|
 			@en_to_braille_dictionary[c]
 		end
 		braille.compact
 	end
 
-	def convert_to_braille(array)
-		message = ''
-		# a1, a2, a3, a4 = [], [], [], []
-		3.times do |n|
-			array.each do |x|
-				x[n + 0].to_s == '1' ? message << "O" : message << "."
-				x[n + 3].to_s == '1' ? message << "O" : message << "."
-			end
-			# require 'pry'; binding.pry
-			message << "\n"
+	def split_into_printable_rows(braille_arrays)
+		first_row = []
+		second_row = []
+		third_row = []
+		braille_arrays.map do |braille_array|
+			first_row << braille_array[0]
+			second_row << braille_array[1]
+			third_row << braille_array[2]
 		end
-		message
+		[first_row, second_row, third_row]
 	end
+
+	# def convert_to_braille(array)
+	# 	message = ''
+	# 	# a1, a2, a3, a4 = [], [], [], []
+	# 	3.times do |n|
+	# 		array.each do |x|
+	# 			x[n + 0].to_s == '1' ? message << "O" : message << "."
+	# 			x[n + 3].to_s == '1' ? message << "O" : message << "."
+	# 		end
+	# 		# require 'pry'; binding.pry
+	# 		message << "\n"
+	# 	end
+	# 	message
+	# end
 
 	def self.create_file(terminal_arguments)
 		to_braille = ToBraille.new(terminal_arguments)
-		braille_array = to_braille.convert_str_to_braille_chars(to_braille.incoming_text)
+		braille_array = to_braille.convert_str_to_braille_arrays(to_braille.incoming_text)
 		new_text = to_braille.convert_to_braille(braille_array)
 		to_braille.outgoing_file.write(new_text)
 	end

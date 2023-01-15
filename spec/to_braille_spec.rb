@@ -24,7 +24,7 @@ describe ToBraille do
 		it 'converts string to braille' do
 			txt = 'hi'
 			hi_in_braille = [["11", "00", "10"], ["01", "01", "00"]]
-			require 'pry'; binding.pry
+
 			expect(translator.convert_str_to_braille_arrays(txt)).to eq(hi_in_braille)
 		end
 	end
@@ -36,7 +36,8 @@ describe ToBraille do
 
 			converted_to_rows = [['11', '10', '11', '11', '10'], ['00', '00', '10', '10', '10'],
 													['10', '10', '00', '00', '10']]
-			expect(translator.split_into_printable_rows(hi_in_braille)).to eq(converted_to_rows)
+
+			expect(translator.split_into_printable_rows(hello_in_braille)).to eq(converted_to_rows)
 		end
 	end
 	# describe '#convert_to_braille' do
