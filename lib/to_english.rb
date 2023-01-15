@@ -62,8 +62,12 @@ class ToEnglish
 	end
 	
 	def convert_columns_to_braille(columns)
-		letters = columns.transpose.map do |column|
-			column.map(&:join)
+		letters = []
+		x = columns.group_by(&:count)
+		x.values.each do |y|
+			y.transpose.map do |column|
+				letters << column.map(&:join)
+			end
 		end
 		letters
 	end
