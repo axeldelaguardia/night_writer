@@ -4,7 +4,6 @@ class ToBraille
 	def initialize(filepaths)
 		@incoming_text = File.read("./io_files/#{filepaths[0]}")
 		@outgoing_file = File.new("./io_files/#{filepaths[1]}", 'w')
-		puts "Created '#{filepaths[1]}' containing #{incoming_text.length} characters"
 		@en_to_braille_dictionary = {
 			'a' => ['10', '00', '00'],
 			'b' => ['11', '00', '00'],
@@ -45,6 +44,7 @@ class ToBraille
 			'-' => ['00', '11', '00'],
 			' ' => ['00', '00', '00']
 		}
+		puts "Created '#{filepaths[1]}' containing #{incoming_text.length} characters"
 	end
 
 	def convert_str_to_braille_arrays(str)
@@ -82,21 +82,6 @@ class ToBraille
 		three_rows
 	end
 
-
-	# def convert_to_braille(array)
-	# 	message = ''
-	# 	# a1, a2, a3, a4 = [], [], [], []
-	# 	3.times do |n|
-	# 		array.each do |x|
-	# 			x[n + 0].to_s == '1' ? message << "O" : message << "."
-	# 			x[n + 3].to_s == '1' ? message << "O" : message << "."
-	# 		end
-	# 		# require 'pry'; binding.pry
-	# 		message << "\n"
-	# 	end
-	# 	message
-	# end
-
 	def translate_to_txt(array_with_strings)
 		message = ''
 		array_with_strings[0].chars.each_slice(80).to_a.count.times do |num|
@@ -109,9 +94,11 @@ class ToBraille
 
 	def self.create_file(terminal_arguments)
 		to_braille = ToBraille.new(terminal_arguments)
-		braille_array = to_braille.convert_str_to_braille_arrays(to_braille.incoming_text)
-		new_text = to_braille.convert_to_braille(braille_array)
-		to_braille.outgoing_file.write(new_text)
+		braille_arrays = to_braille.convert_str_to_braille_arrays(to_braille.incoming_text)
+		printable_rows = to_braille.split_into_printable_rows(braille_arrays)
+		ready_rows = to_braille.convert_all_rows_to_dots(printable_rows)
+		final_text = to_braille.translate_to_txt(ready_rows)
+		to_braille.outgoing_file.write(final_text)
 	end
 
 end
