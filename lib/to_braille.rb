@@ -66,13 +66,22 @@ class ToBraille
 		[first_row, second_row, third_row]
 	end
 
-	def convert_nums_to_dots(str)
+	def convert_nums_to_dots(string)
 		message = ''
-		str.chars.each do |char|
+		string.chars.each do |char|
 			char == '1' ? message << "O" : message << "."
 		end
 		message
 	end
+
+	def convert_all_rows_to_dots(array_of_rows)
+		three_rows = []
+		array_of_rows.each do |row|
+			three_rows << convert_nums_to_dots(row.join)
+		end
+		three_rows
+	end
+
 
 	# def convert_to_braille(array)
 	# 	message = ''
