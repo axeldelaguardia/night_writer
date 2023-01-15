@@ -54,7 +54,18 @@ class ToEnglish
 
 	def split_text_to_rows(incoming_text)
 		incoming_text.split.map {|row| row.chars}
-		require 'pry'; binding.pry
+
+	end
+
+	def split_text_to_columns(rows)
+		rows.map {|y| y.each_slice(2).to_a}
+	end
+	
+	def convert_columns_to_braille(columns)
+		letters = columns.transpose.map do |column|
+			column.map(&:join)
+		end
+		letters
 	end
 
 end
