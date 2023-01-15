@@ -81,6 +81,12 @@ class ToBraille
 		message.chop
 	end
 
+	def string_to_text_format(string)
+		braille_arrays = convert_str_to_braille_arrays(incoming_text)
+		printable_rows = split_into_printable_rows(braille_arrays)
+		final_text = translate_to_txt(printable_rows)
+	end
+
 	def self.create_file(terminal_arguments)
 		to_braille = ToBraille.new(terminal_arguments)
 		braille_arrays = to_braille.convert_str_to_braille_arrays(to_braille.incoming_text)
