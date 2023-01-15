@@ -19,4 +19,18 @@ describe ToEnglish do
 			expect(translator.en_to_braille_dictionary['f']).to eq(['11', '01', '00'])
 		end
 	end
+
+	describe '#split_text_to_rows' do
+		it 'splits text into rows' do
+			text = "OOO.OOOOO.\n....O.O.O.\nO.O.....O."
+
+			expected = [
+				['O', 'O', 'O', '.', 'O', 'O', 'O', 'O', 'O', '.'],
+				['.', '.', '.', '.', 'O', '.', 'O', '.', 'O', '.'],
+				['O', '.', 'O', '.', '.', '.', '.', '.', 'O', '.']
+			]
+
+			expect(translator.split_text_to_rows(text)).to eq(expected)
+		end
+	end
 end
