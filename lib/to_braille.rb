@@ -57,7 +57,6 @@ class ToBraille
 			@en_to_braille_dictionary[c]
 		end
 		braille.compact
-		require 'pry'; binding.pry
 	end
 
 	def split_into_printable_rows(braille_arrays)
@@ -69,23 +68,7 @@ class ToBraille
 			second_row << braille_array[1]
 			third_row << braille_array[2]
 		end
-		[first_row, second_row, third_row]
-	end
-
-	def convert_nums_to_dots(string)
-		message = ''
-		string.chars.each do |char|
-			char == '1' ? message << "O" : message << "."
-		end
-		message
-	end
-
-	def convert_all_rows_to_dots(array_of_rows)
-		three_rows = []
-		array_of_rows.each do |row|
-			three_rows << convert_nums_to_dots(row.join)
-		end
-		three_rows
+		[first_row.join, second_row.join, third_row.join]
 	end
 
 	def translate_to_txt(array_with_strings)
@@ -102,8 +85,7 @@ class ToBraille
 		to_braille = ToBraille.new(terminal_arguments)
 		braille_arrays = to_braille.convert_str_to_braille_arrays(to_braille.incoming_text)
 		printable_rows = to_braille.split_into_printable_rows(braille_arrays)
-		ready_rows = to_braille.convert_all_rows_to_dots(printable_rows)
-		final_text = to_braille.translate_to_txt(ready_rows)
+		final_text = to_braille.translate_to_txt(printable_rows)
 		to_braille.outgoing_file.write(final_text)
 	end
 
