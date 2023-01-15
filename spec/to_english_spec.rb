@@ -15,22 +15,38 @@ describe ToEnglish do
 		it 'has attributes' do
 			allow(translator).to receive(:incoming_text).and_return('hello world')
 			expect(translator.incoming_text).to eq('hello world')
-			expect(translator.en_to_braille_dictionary['a']).to eq(['10', '00', '00'])
-			expect(translator.en_to_braille_dictionary['f']).to eq(['11', '01', '00'])
+			expect(translator.en_to_braille_dictionary['a']).to eq(['O.', '..', '..'])
+			expect(translator.en_to_braille_dictionary['f']).to eq(['OO', 'O.', '..'])
 		end
 	end
 
 	describe '#split_text_to_rows' do
 		it 'splits text into rows' do
-			text = "OOO.OOOOO.\n....O.O.O.\nO.O.....O."
+			text = "O.O.O.O.O.\nOO.OO.O..O\n....O.O.O."
 
 			expected = [
-				['O', 'O', 'O', '.', 'O', 'O', 'O', 'O', 'O', '.'],
-				['.', '.', '.', '.', 'O', '.', 'O', '.', 'O', '.'],
-				['O', '.', 'O', '.', '.', '.', '.', '.', 'O', '.']
+				["O", ".", "O", ".", "O", ".", "O", ".", "O", "."],
+				["O", "O", ".", "O", "O", ".", "O", ".", ".", "O"],
+				[".", ".", ".", ".", "O", ".", "O", ".", "O", "."]
 			]
 
 			expect(translator.split_text_to_rows(text)).to eq(expected)
+		end
+	end
+
+	describe '#split_text_to_columns' do
+		it 'splits text into columns' do
+			rows = [
+				["O", ".", "O", ".", "O", ".", "O", ".", "O", "."],
+				["O", "O", ".", "O", "O", ".", "O", ".", ".", "O"],
+				[".", ".", ".", ".", "O", ".", "O", ".", "O", "."]
+			]
+
+			expected = [[["O", "."], ["O", "."], ["O", "."], ["O", "."], ["O", "."]], 
+									[["O", "O"], [".", "O"], ["O", "."], ["O", "."], [".", "O"]], 
+									[[".", "."], [".", "."], ["O", "."], ["O", "."], ["O", "."]]]
+
+			expect(translator.split_text_to_columns(rows)).to eq(expected)
 		end
 	end
 end
