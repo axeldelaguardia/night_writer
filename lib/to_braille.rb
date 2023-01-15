@@ -89,9 +89,7 @@ class ToBraille
 
 	def self.create_file(terminal_arguments)
 		to_braille = ToBraille.new(terminal_arguments)
-		braille_arrays = to_braille.convert_str_to_braille_arrays(to_braille.incoming_text)
-		printable_rows = to_braille.split_into_printable_rows(braille_arrays)
-		final_text = to_braille.translate_to_txt(printable_rows)
+		final_text = to_braille.string_to_text_format(to_braille.incoming_text)
 		to_braille.outgoing_file.write(final_text)
 	end
 
