@@ -40,6 +40,14 @@ describe ToBraille do
 			expect(translator.split_into_printable_rows(hello_in_braille)).to eq(converted_to_rows)
 		end
 	end
+
+	describe 'convert_nums_to_dots' do
+		it 'converts 1s and 0s to dots or Os' do
+			string = '11001001110'
+
+			expect(translator.convert_nums_to_dots(string)).to eq('OO..O..OOO.')
+		end
+	end
 	# describe '#convert_to_braille' do
 	# 	it 'converts to printable braille' do
 	# 		hi = ["110010", "010100"]
