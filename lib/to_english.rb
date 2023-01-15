@@ -68,4 +68,12 @@ class ToEnglish
 		letters
 	end
 
+	def translate_to_english(braille_arrays)
+		text = ''
+		braille_arrays.each do |braille_letter|
+			text << @en_to_braille_dictionary.key(braille_letter)
+		end
+		text
+	end
+
 end
