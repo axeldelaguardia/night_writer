@@ -48,9 +48,15 @@ describe ToBraille do
 		end
 	end
 
-	xdescribe '#create_file' do
-		it 'runs through the methods to create the file' do
+	describe '#string_to_text_format' do
+		it 'combines all methods to convert the string to text format ' do
+			incoming_text = 'hello world'
 
+			expected = "O.O.O.O.O....OO.O.O.OO\nOO.OO.O..O..OO.OOOO..O\n....O.O.O....OO.O.O..."
+			
+			allow(translator).to receive(:incoming_text).and_return(incoming_text)
+
+			expect(translator.string_to_text_format(incoming_text)).to eq(expected)
 		end
 	end
 end
