@@ -62,4 +62,13 @@ describe ToEnglish do
 			expect(translator.convert_columns_to_braille(columns)).to eq(hello)
 		end
 	end
+
+	describe '#translate_to_english' do
+		it 'translates braille arrays to english characters' do
+			hello = [['O.', 'OO', '..'], ['O.', '.O', '..'], ['O.', 'O.', 'O.'], 
+							 ['O.', 'O.', 'O.'], ['O.', '.O', 'O.']]
+
+			expect(translator.translate_to_english(hello)).to eq('hello')
+		end
+	end
 end
