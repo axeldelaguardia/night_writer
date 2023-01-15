@@ -76,4 +76,13 @@ class ToEnglish
 		text
 	end
 
+	def self.create_file(terminal_arguments)
+		to_english = ToEnglish.new(terminal_arguments)
+		rows = to_english.split_text_to_rows(to_english.incoming_text)
+		columns = to_english.split_text_to_columns(rows)
+		braille_arrays = to_english.convert_columns_to_braille(columns)
+		final_text = to_english.translate_to_english(braille_arrays)
+		to_english.outgoing_file.write(final_text)
+	end
+
 end
