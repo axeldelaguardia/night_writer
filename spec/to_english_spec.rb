@@ -71,4 +71,12 @@ describe ToEnglish do
 			expect(translator.translate_to_english(hello)).to eq('hello')
 		end
 	end
+
+	describe '#braille_to_text' do
+		it 'integrates all methods and braille to english' do
+			braille = ".O..OOO.O.OOOOO...O.O.O.O.OO.OO.OOOOO....OO....OO.O...OOO.O.OO....O.OO...OO.O...\nO...O.O..O.OOO.O....O.O..OOOO....O...O..OO.O..OOOO.O..O.O...OOO....OO...OOOO.O..\n....O.O.............O.O.........O.......O.O...O.........O.........O.....O......."
+
+			expect(translator.braille_to_text(braille)).to eq('')
+		end
+	end
 end
