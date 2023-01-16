@@ -74,9 +74,9 @@ describe ToEnglish do
 
 	describe '#braille_to_text' do
 		it 'integrates all methods and braille to english' do
-			braille = ".O..OOO.O.OOOOO...O.O.O.O.OO.OO.OOOOO....OO....OO.O...OOO.O.OO....O.OO...OO.O...\nO...O.O..O.OOO.O....O.O..OOOO....O...O..OO.O..OOOO.O..O.O...OOO....OO...OOOO.O..\n....O.O.............O.O.........O.......O.O...O.........O.........O.....O......."
+			braille = ".OO.O...OOO..OOOO...O.O.O..OOO..OOO.OO...OO.OOOO.O..O.O.O.O....OO.O...O.O.O.OO..\nOOOO.O..OO..O.......O.OO.OOO.O..O..O....OO....O.O....OO..OOO..OOOO.O..O....O.O..\nO.......O.OO....O.....O.O..OO.....O.OO....OOO.O.O...O.OO..O...O.......O...OOOO..\nOOO.OO\n.O.OOO\n..O..."
 
-			expect(translator.braille_to_text(braille)).to eq('')
+			expect(translator.braille_to_text(braille)).to eq("the quick brown fox jumps over the lazy dog")
 		end
 	end
 end
