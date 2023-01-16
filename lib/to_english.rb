@@ -6,6 +6,20 @@ class ToEnglish < BrailleDictionary
 		super(filepaths)
 	end
 
+	def self.create_file(terminal_arguments)
+		to_english = ToEnglish.new(terminal_arguments)
+		final_text = to_english.braille_to_text(to_english.incoming_text)
+		to_english.outgoing_file.write(final_text)
+		p to_english.finished_message(final_text)
+	end
+
+	def braille_to_text(incoming_text)
+		rows = split_text_to_rows(incoming_text)
+		columns = split_text_to_columns(rows)
+		braille_arrays = convert_columns_to_braille(columns)
+		translate_to_english(braille_arrays)
+	end
+
 	def split_text_to_rows(incoming_text)
 		incoming_text.split.map {|row| row.chars}
 	end
@@ -32,19 +46,4 @@ class ToEnglish < BrailleDictionary
 		end
 		text
 	end
-
-	def braille_to_text(incoming_text)
-		rows = split_text_to_rows(incoming_text)
-		columns = split_text_to_columns(rows)
-		braille_arrays = convert_columns_to_braille(columns)
-		translate_to_english(braille_arrays)
-	end
-
-	def self.create_file(terminal_arguments)
-		to_english = ToEnglish.new(terminal_arguments)
-		final_text = to_english.braille_to_text(to_english.incoming_text)
-		to_english.outgoing_file.write(final_text)
-		p to_english.finished_message(final_text)
-	end
-
 end

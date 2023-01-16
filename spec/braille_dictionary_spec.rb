@@ -41,6 +41,7 @@ describe BrailleDictionary do
 			terminal_arguments = ['./io_files/unavailable.txt', './io_files/to_english.txt']
 
 			expect(BrailleDictionary.new(terminal_arguments)).to raise('./io_files/unavailable.txt is not a valid filepath. Please try again')
+			expect(BrailleDictionary.new(terminal_arguments)).should_exit_with_code(-1)
 		end
 	end
 end
