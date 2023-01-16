@@ -1,55 +1,9 @@
-class ToBraille
-	attr_reader :incoming_text, :outgoing_file, :en_to_braille_dictionary
+require './lib/braille_dictionary'
+
+class ToBraille < BrailleDictionary
 	
 	def initialize(filepaths)
-		begin
-			@incoming_text = File.read("#{filepaths[0]}")
-		rescue Errno::ENOENT => exception
-			$stderr.puts "Incoming file not found. Please use the correct filepath"
-			exit -1
-		end
-		@outgoing_file = File.new("#{filepaths[1]}", 'w')
-		@en_to_braille_dictionary = {
-			'a' => ['O.', '..', '..'],
-      'b' => ['O.', 'O.', '..'],
-      'c' => ['OO', '..', '..'],
-      'd' => ['OO', '.O', '..'],
-      'e' => ['O.', '.O', '..'],
-      'f' => ['OO', 'O.', '..'],
-      'g' => ['OO', 'OO', '..'],
-      'h' => ['O.', 'OO', '..'],
-      'i' => ['.O', 'O.', '..'],
-      'j' => ['.O', 'OO', '..'],
-      'k' => ['O.', '..', 'O.'],
-      'l' => ['O.', 'O.', 'O.'],
-      'm' => ['OO', '..', 'O.'],
-      'n' => ['OO', '.O', 'O.'],
-      'o' => ['O.', '.O', 'O.'],
-      'p' => ['OO', 'O.', 'O.'],
-      'q' => ['OO', 'OO', 'O.'],
-      'r' => ['O.', 'OO', 'O.'],
-      's' => ['.O', 'O.', 'O.'],
-      't' => ['.O', 'OO', 'O.'],
-      'u' => ['O.', '..', 'OO'],
-      'v' => ['O.', 'O.', 'OO'],
-      'w' => ['.O', 'OO', '.O'],
-      'x' => ['OO', '..', 'OO'],
-      'y' => ['OO', '.O', 'OO'],
-      'z' => ['O.', '.O', 'OO'],
-			',' => ['..', 'O.', '..'],
-			';' => ['..', 'O.', 'O.'],
-			':' => ['..', 'OO', '..'],
-			'.' => ['..', 'OO', '.O'],
-			'!' => ['..', 'OO', 'O.'],
-			'(' => ['..', 'OO', 'OO'],
-			')' => ['..', 'OO', 'OO'],
-			'?' => ['..', 'O.', 'OO'],
-			'"' => ['..', '.O', 'OO'],
-			"'" => ['..', '..', 'O.'],
-			'-' => ['..', '..', 'OO'],
-			' ' => ['..', '..', '..']
-		}
-		puts "Created '#{filepaths[1]}' containing #{incoming_text.length} characters"
+		super(filepaths)
 	end
 
 	def convert_str_to_braille_arrays(str)
@@ -91,6 +45,7 @@ class ToBraille
 		to_braille = ToBraille.new(terminal_arguments)
 		final_text = to_braille.string_to_text_format(to_braille.incoming_text)
 		to_braille.outgoing_file.write(final_text)
+		to_braille.finished_message(to_braille.incoming_text)
 	end
 
 end
