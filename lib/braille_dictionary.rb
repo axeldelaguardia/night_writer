@@ -3,12 +3,14 @@ class BrailleDictionary
 	
 	def initialize(filepaths)
 		@filepaths = filepaths
+
 		begin
 			@incoming_text = File.read("#{filepaths[0]}")
 		rescue Errno::ENOENT => exception
 			$stderr.puts "#{filepaths[0]} is not a valid filepath. Please try again"
 			exit -1
 		end
+
 		@outgoing_file = File.new("#{filepaths[1]}", 'w')
 
 		@en_to_braille_dictionary = {
@@ -53,7 +55,7 @@ class BrailleDictionary
 		}
 	end
 
-	def finished_message(filename)
-		puts "Created '#{filepaths[1]}' containing #{filename.length} characters"
+	def finished_message(text)
+		"Created '#{filepaths[1]}' containing #{text.length} characters"
 	end
 end

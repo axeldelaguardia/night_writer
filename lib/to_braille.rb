@@ -45,7 +45,7 @@ class ToBraille < BrailleDictionary
 		to_braille = ToBraille.new(terminal_arguments)
 		final_text = to_braille.string_to_text_format(to_braille.incoming_text)
 		to_braille.outgoing_file.write(final_text)
-		to_braille.finished_message(to_braille.incoming_text)
+		p to_braille.finished_message(to_braille.incoming_text)
 	end
 
 end

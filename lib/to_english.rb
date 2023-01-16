@@ -44,7 +44,7 @@ class ToEnglish < BrailleDictionary
 		to_english = ToEnglish.new(terminal_arguments)
 		final_text = to_english.braille_to_text(to_english.incoming_text)
 		to_english.outgoing_file.write(final_text)
-		to_english.finished_message(final_text)
+		p to_english.finished_message(final_text)
 	end
 
 end

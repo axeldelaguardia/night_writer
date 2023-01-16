@@ -79,4 +79,10 @@ describe ToEnglish do
 			expect(translator.braille_to_text(braille)).to eq("the quick brown fox jumps over the lazy dog")
 		end
 	end
+
+	describe '#create_file' do
+		it 'runs all methods, converts braille to english and writes on new file' do
+			expect(ToEnglish.create_file(@terminal_arguments)).to eq("Created './io_files/to_english.txt' containing 177 characters")
+		end
+	end
 end

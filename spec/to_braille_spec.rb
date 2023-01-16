@@ -59,4 +59,10 @@ describe ToBraille do
 			expect(translator.string_to_text_format(incoming_text)).to eq(expected)
 		end
 	end
+
+	describe '#create_file' do
+		it 'runs all methods, converts english to braille and writes on new file' do
+			expect(ToBraille.create_file(@filepath)).to eq("Created './io_files/braille.txt' containing 43 characters")
+		end
+	end
 end
