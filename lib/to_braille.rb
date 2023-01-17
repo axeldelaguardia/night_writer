@@ -20,12 +20,15 @@ class ToBraille < BrailleDictionary
 	end
 
 	def convert_str_to_braille_arrays(str)
-		braille = str.downcase.chars.map do |c|
-			@en_to_braille_dictionary[c]
+		exit_if_not_exist(str)
+		braille = []
+		str.chars.each do |c|
+			braille << ['..', '..', '.O'] if c == c.upcase unless c == ' '
+			braille << @en_to_braille_dictionary[c.downcase]
 		end
 		braille.compact
 	end
-
+	
 	def split_into_printable_rows(braille_arrays)
 		first_row = []
 		second_row = []

@@ -27,6 +27,20 @@ describe ToBraille do
 
 			expect(translator.convert_str_to_braille_arrays(txt)).to eq(hi_in_braille)
 		end
+
+		it 'checks for capital letters' do
+			txt = 'Some Are Caps'
+			txt_in_braille = [["..", "..", ".O"], [".O", "O.", "O."],
+												["O.", ".O", "O."], ["OO", "..", "O."],
+												["O.", ".O", ".."], ["..", "..", ".."],
+												["..", "..", ".O"], ["O.", "..", ".."],
+												["O.", "OO", "O."], ["O.", ".O", ".."],
+												["..", "..", ".."], ["..", "..", ".O"],
+												["OO", "..", ".."], ["O.", "..", ".."],
+												["OO", "O.", "O."], [".O", "O.", "O."]]
+
+			expect(translator.convert_str_to_braille_arrays(txt)).to eq(txt_in_braille)
+		end
 	end
 
 	describe '#split_into_printable_rows' do
