@@ -14,6 +14,7 @@ class ToEnglish < BrailleDictionary
 	end
 
 	def braille_to_text(incoming_text)
+		exit_if_not_exist(incoming_text)
 		rows = split_text_to_rows(incoming_text)
 		columns = split_text_to_columns(rows)
 		braille_arrays = convert_columns_to_braille(columns)
