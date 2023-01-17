@@ -70,6 +70,23 @@ describe ToEnglish do
 
 			expect(translator.translate_to_english(hello)).to eq('hello')
 		end
+
+		it 'catches capital letters with a pipe' do
+			hello_with_caps = [['..', '..', '.O'], ['O.', 'OO', '..'], ['O.', '.O', '..'], ['O.', 'O.', 'O.'], 
+			['..', '..', '.O'], ['O.', 'O.', 'O.'], ['O.', '.O', 'O.']]
+
+			expect(translator.translate_to_english(hello_with_caps)).to eq('HelLo')
+		end
+	end
+
+	describe 'convert_to_caps' do
+		it 'converts specific text to caps' do
+			message = '|the |quick |brown |fox |jumped |over |the |lazy |dog'
+
+			expected = 'The Quick Brown Fox Jumped Over The Lazy Dog'
+
+			expect(translator.convert_to_caps(message)).to eq(expected)
+		end
 	end
 
 	describe '#braille_to_text' do
