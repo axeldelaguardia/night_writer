@@ -28,20 +28,11 @@ describe BrailleDictionary do
 		end
 	end
 
-	xdescribe 'Raise Error' do
+	describe 'Raise Error' do
 		it 'returns an error message when the incoming file doesnt exist' do
 			terminal_arguments = ['./io_files/unavailable.txt', './io_files/to_english.txt']
-
-			expect(BrailleDictionary.new(terminal_arguments)).to eq('./io_files/unavailable.txt is not a valid filepath. Please try again')
-		end
-	end
-
-	xdescribe 'Raise Error' do
-		it 'returns an error message when the incoming file doesnt exist' do
-			terminal_arguments = ['./io_files/unavailable.txt', './io_files/to_english.txt']
-
-			expect(BrailleDictionary.new(terminal_arguments)).to raise('./io_files/unavailable.txt is not a valid filepath. Please try again')
-			expect(BrailleDictionary.new(terminal_arguments)).should_exit_with_code(-1)
+			braille_dictionary = BrailleDictionary.new(terminal_arguments)
+			expect{braille_dictionary.io}.to output("No such file or directory @ rb_sysopen - ./io_files/unavailable.txt\n").to_stdout
 		end
 	end
 end

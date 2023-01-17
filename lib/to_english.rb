@@ -14,6 +14,7 @@ class ToEnglish < BrailleDictionary
 	end
 
 	def braille_to_text(incoming_text)
+		exit_if_not_exist(incoming_text)
 		rows = split_text_to_rows(incoming_text)
 		columns = split_text_to_columns(rows)
 		braille_arrays = convert_columns_to_braille(columns)
@@ -44,6 +45,14 @@ class ToEnglish < BrailleDictionary
 		braille_arrays.each do |braille_letter|
 			text << @en_to_braille_dictionary.key(braille_letter)
 		end
-		text
+		convert_to_caps(text)
+	end
+
+	def convert_to_caps(text)
+		message = ''
+		text.chars.each_with_index do |x, y|
+			text.chars[y-1] == '|' ? message << x.upcase : message << x
+		end
+		message.gsub('|', '')
 	end
 end
